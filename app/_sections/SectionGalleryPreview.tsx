@@ -43,8 +43,13 @@ export function SectionGalleryPreview() {
           transition={{ duration: 0.8, delay: 0.1 }}
         >
           <div
-            className="flex gap-4 md:gap-6 px-6 md:px-12 overflow-x-auto snap-x snap-mandatory pb-4 [&::-webkit-scrollbar]:hidden"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            className="flex gap-4 md:gap-6 px-6 md:px-12 overflow-x-auto snap-x snap-proximity pb-4 [&::-webkit-scrollbar]:hidden"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              overscrollBehaviorX: "contain",
+              overscrollBehaviorY: "auto",
+            }}
           >
             {photos.map((url, i) => (
               <motion.div
