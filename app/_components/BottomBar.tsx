@@ -22,7 +22,7 @@ export function BottomBar({ items }: Props) {
       aria-label="Mobil gezinme"
       className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-[55] w-[calc(100%-1rem)]"
     >
-      <div className="flex items-center justify-between rounded-full bg-[#1a0f0a]/90 backdrop-blur-md border border-[#e8a87c]/15 p-1 shadow-[0_10px_40px_-8px_rgba(26,15,10,0.7)]">
+      <div className="flex items-center justify-between rounded-full bg-[#1a0f0a]/90 backdrop-blur-md border border-[#e8a87c]/15 p-1 pr-3 shadow-[0_10px_40px_-8px_rgba(26,15,10,0.7)]">
         <Link
           href="/"
           aria-label="Ana sayfa"

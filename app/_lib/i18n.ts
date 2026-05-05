@@ -95,7 +95,7 @@ const tr: T = {
   navHome: "Ana Sayfa",
   navStory: "Hikayemiz",
   navEvent: "Etkinlik",
-  navGallery: "Fotoğraf Yükle",
+  navGallery: "Galeri",
   navMemory: "Anı Bırak",
   navRsvp: "LCV",
   bottomMemory: "Anı Bırak",
