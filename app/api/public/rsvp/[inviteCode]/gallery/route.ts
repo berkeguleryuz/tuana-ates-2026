@@ -15,7 +15,8 @@ export async function POST(
   let form: FormData;
   try {
     form = await req.formData();
-  } catch {
+  } catch (err) {
+    console.error("[gallery] formData parse failed", err);
     return NextResponse.json({ error: "Geçersiz istek." }, { status: 400 });
   }
 
@@ -23,15 +24,27 @@ export async function POST(
   const uploaderRaw = form.get("uploader");
 
   if (!(file instanceof File) || file.size === 0) {
+    console.error("[gallery] missing or empty file", {
+      hasFile: file instanceof File,
+      size: file instanceof File ? file.size : null,
+    });
     return NextResponse.json({ error: "Dosya eksik." }, { status: 400 });
   }
   if (file.size > MAX_FILE_SIZE) {
+    console.error("[gallery] file too large", {
+      name: file.name,
+      size: file.size,
+    });
     return NextResponse.json(
       { error: "Dosya 10MB sınırını aşıyor." },
       { status: 413 }
     );
   }
   if (!file.type.startsWith("image/")) {
+    console.error("[gallery] non-image file rejected", {
+      name: file.name,
+      type: file.type,
+    });
     return NextResponse.json(
       { error: "Sadece görsel yüklenebilir." },
       { status: 400 }
@@ -41,6 +54,7 @@ export async function POST(
   const uploader =
     typeof uploaderRaw === "string" ? uploaderRaw.trim() : "";
   if (!uploader) {
+    console.error("[gallery] missing uploader name");
     return NextResponse.json({ error: "İsim zorunlu." }, { status: 400 });
   }
 
@@ -55,6 +69,13 @@ export async function POST(
     });
 
     if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      console.error("[gallery] upstream rejected", {
+        status: res.status,
+        body: body.slice(0, 500),
+        file: { name: file.name, type: file.type, size: file.size },
+        uploader,
+      });
       return NextResponse.json(
         { error: "Yükleme başarısız." },
         { status: 502 }
@@ -62,7 +83,12 @@ export async function POST(
     }
 
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (err) {
+    console.error("[gallery] upstream fetch threw", {
+      err: err instanceof Error ? err.message : String(err),
+      file: { name: file.name, type: file.type, size: file.size },
+      uploader,
+    });
     return NextResponse.json(
       { error: "Yükleme başarısız." },
       { status: 500 }
