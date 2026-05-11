@@ -24,6 +24,45 @@ interface Props {
   initialPhotos: Photo[];
 }
 
+async function compressImage(
+  file: File,
+  maxDim = 1920,
+  quality = 0.85
+): Promise<File> {
+  const bitmap = await createImageBitmap(file, {
+    imageOrientation: "from-image",
+  });
+
+  let { width, height } = bitmap;
+  if (width > maxDim || height > maxDim) {
+    const ratio = Math.min(maxDim / width, maxDim / height);
+    width = Math.round(width * ratio);
+    height = Math.round(height * ratio);
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    bitmap.close();
+    throw new Error("canvas-unavailable");
+  }
+  ctx.drawImage(bitmap, 0, 0, width, height);
+  bitmap.close();
+
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, "image/jpeg", quality)
+  );
+  if (!blob) throw new Error("encode-failed");
+
+  const baseName = file.name.replace(/\.[^.]+$/, "") || "photo";
+  return new File([blob], `${baseName}.jpg`, {
+    type: "image/jpeg",
+    lastModified: Date.now(),
+  });
+}
+
 export function GalleryGrid({ initialPhotos }: Props) {
   const wedding = useWedding();
   const router = useRouter();
@@ -46,12 +85,6 @@ export function GalleryGrid({ initialPhotos }: Props) {
 
     const fileArray = Array.from(files).slice(0, 25);
 
-    const oversized = fileArray.filter((f) => f.size > 10 * 1024 * 1024);
-    if (oversized.length > 0) {
-      toast.error(`${oversized.length} dosya 10MB sınırını aşıyor.`);
-      return;
-    }
-
     setIsUploading(true);
     setUploadProgress({ current: 0, total: fileArray.length });
 
@@ -61,8 +94,20 @@ export function GalleryGrid({ initialPhotos }: Props) {
     for (let i = 0; i < fileArray.length; i++) {
       setUploadProgress({ current: i + 1, total: fileArray.length });
       try {
+        let toUpload: File;
+        try {
+          toUpload = await compressImage(fileArray[i]);
+        } catch {
+          toUpload = fileArray[i];
+        }
+
+        if (toUpload.size > 10 * 1024 * 1024) {
+          failCount++;
+          continue;
+        }
+
         const formData = new FormData();
-        formData.append("file", fileArray[i]);
+        formData.append("file", toUpload);
         formData.append("uploader", uploaderName.trim());
 
         const res = await fetch(
