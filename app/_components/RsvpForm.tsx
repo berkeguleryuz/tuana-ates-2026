@@ -17,7 +17,7 @@ interface AdditionalGuest {
 }
 
 const inputClass =
-  "w-full h-12 rounded-xl border border-[#e8a87c]/15 bg-[#241710] px-4 text-sm text-[#faf0e6] placeholder:text-[#8a7565] focus:border-[#e8a87c]/40 focus:outline-none transition-all font-sans";
+  "w-full h-12 rounded-xl border border-[#e8a87c]/15 bg-[#241710] px-4 text-base sm:text-sm text-[#faf0e6] placeholder:text-[#8a7565] focus:border-[#e8a87c]/40 focus:outline-none transition-all font-sans";
 
 export function RsvpForm() {
   const wedding = useWedding();

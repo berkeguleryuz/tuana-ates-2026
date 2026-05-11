@@ -322,7 +322,7 @@ export function GalleryGrid({ initialPhotos }: Props) {
                   onChange={(e) => setUploaderName(e.target.value)}
                   placeholder={t("galleryUploadNamePlaceholder")}
                   aria-label={t("galleryUploadNamePlaceholder")}
-                  className="w-full h-11 rounded-lg border border-[#e8a87c]/15 bg-[#1a0f0a] pl-9 pr-3 text-sm text-[#faf0e6] placeholder:text-[#8a7565] focus:border-[#e8a87c]/40 focus:outline-none transition-all font-sans"
+                  className="w-full h-11 rounded-lg border border-[#e8a87c]/15 bg-[#1a0f0a] pl-9 pr-3 text-base sm:text-sm text-[#faf0e6] placeholder:text-[#8a7565] focus:border-[#e8a87c]/40 focus:outline-none transition-all font-sans"
                 />
               </div>
 
