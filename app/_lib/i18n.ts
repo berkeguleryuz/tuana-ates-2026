@@ -120,7 +120,7 @@ const tr: T = {
   venueCtaButton: "Detayları Görün",
   galleryLabel: "Galeri",
   galleryHeading: "Anılarımız",
-  galleryCtaButton: "Tüm Galeriyi Gör",
+  galleryCtaButton: "Fotoğraf Ekle",
   galleryUploadHeading: "Fotoğraf Yükle",
   galleryUploadNamePlaceholder: "Adınız Soyadınız",
   galleryUploading: "yükleniyor...",

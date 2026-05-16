@@ -42,23 +42,15 @@ export function SectionGalleryPreview() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          <div
-            className="flex gap-4 md:gap-6 px-6 md:px-12 overflow-x-auto snap-x snap-proximity pb-4 [&::-webkit-scrollbar]:hidden"
-            style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-              overscrollBehaviorX: "contain",
-              overscrollBehaviorY: "auto",
-            }}
-          >
-            {photos.map((url, i) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 px-6 md:px-12">
+            {photos.slice(0, 4).map((url, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="relative w-[260px] md:w-[320px] shrink-0 snap-start group"
+                className="relative group"
               >
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-[#e8a87c]/10 transition-shadow duration-500 group-hover:shadow-[0_0_30px_rgba(232,168,124,0.1)]">
                   <Image
@@ -66,7 +58,7 @@ export function SectionGalleryPreview() {
                     alt={`${t("galleryLabel")} ${i + 1}`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    sizes="(max-width: 768px) 260px, 320px"
+                    sizes="(max-width: 768px) 50vw, 25vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f0a]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
