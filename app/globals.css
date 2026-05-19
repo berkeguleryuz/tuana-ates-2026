@@ -22,3 +22,31 @@
     color: var(--foreground);
   }
 }
+
+/* Zarf intro: oturumda daha önce açıldıysa ilk boyamada gizle (FOUC engeli) */
+html.ta-envelope-seen .envelope-intro {
+  display: none;
+}
+
+/* Zarf mührü etkileşim ipuçları — hareket/ölçek YOK, yumuşak sıcak ışıma.
+   (GSAP butonun transform'unu kullanıyor; bu yüzden sadece filter/box-shadow.) */
+.envelope-seal {
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
+}
+.envelope-seal:hover,
+.envelope-seal:focus-visible {
+  filter: brightness(1.07);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.55),
+    inset 0 2px 6px rgba(255, 255, 255, 0.4),
+    0 0 26px 5px rgba(240, 194, 127, 0.5);
+}
+.envelope-seal:focus-visible {
+  outline: 2px solid #f0c27f;
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .envelope-seal {
+    transition: none;
+  }
+}

@@ -1,3 +1,4 @@
+import { EnvelopeIntro } from "./_components/EnvelopeIntro";
 import { SectionHero } from "./_sections/SectionHero";
 import { SectionCountdown } from "./_sections/SectionCountdown";
 import { SectionVenuePreview } from "./_sections/SectionVenuePreview";
@@ -8,6 +9,7 @@ import { SectionCTA } from "./_sections/SectionCTA";
 export default function Home() {
   return (
     <>
+      <EnvelopeIntro />
       <SectionHero />
       <SectionCountdown />
       <SectionVenuePreview />

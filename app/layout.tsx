@@ -71,6 +71,13 @@ export default async function RootLayout({
         className="min-h-full flex flex-col bg-[#1a0f0a] text-[#faf0e6]"
         suppressHydrationWarning
       >
+        {/* Zarf intro FOUC engeli: anahtar EnvelopeIntro.tsx içindeki STORAGE_KEY ile aynı olmalı. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('ta-envelope-opened')==='1')document.documentElement.classList.add('ta-envelope-seen')}catch(e){}",
+          }}
+        />
         <WeddingProvider data={weddingData}>
           <div className="relative min-h-screen overflow-x-hidden">
             <SunsetNav />
