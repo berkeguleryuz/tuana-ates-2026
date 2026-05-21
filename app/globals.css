@@ -5,6 +5,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-merienda: var(--font-merienda), ui-serif, serif;
+  --font-cormorant: var(--font-cormorant), ui-serif, serif;
+  --font-geist: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {

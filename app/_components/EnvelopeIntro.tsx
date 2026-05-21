@@ -191,19 +191,25 @@ export function EnvelopeIntro() {
                        flex items-center justify-center cursor-pointer
                        ring-1 ring-black/10"
           >
-            <span className="font-merienda text-[26px] italic text-[#3d2418]/85 select-none">
-              {`${brideFirst.charAt(0)}&${groomFirst.charAt(0)}`}
+            <span className="text-[#3d2418]/85 select-none leading-none flex items-center">
+              <span className="font-merienda italic text-[26px]">{brideFirst.charAt(0)}</span>
+              <span className="font-geist italic text-[28px] font-light mx-0.5 leading-none">
+                &amp;
+              </span>
+              <span className="font-merienda italic text-[26px]">{groomFirst.charAt(0)}</span>
             </span>
           </button>
         </div>
 
         {/* Çift altı yazılar */}
         <div className="absolute left-0 right-0 top-[64%] text-center px-4 select-none">
-          <p className="font-merienda text-2xl text-[#f0c27f] drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-            {`${brideFirst} & ${groomFirst}`}
+          <p className="text-2xl text-[#f0c27f] drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] leading-tight">
+            <span className="font-merienda">{brideFirst}</span>
+            <span className="font-cormorant italic font-medium mx-1.5 text-[1.05em]">ve</span>
+            <span className="font-merienda">{groomFirst}</span>
           </p>
           <p className="mt-2 font-sans text-[10px] tracking-[0.3em] uppercase text-[#e8a87c]/70">
-            Bu davetiye size özeldir
+            sizi davet ediyor
           </p>
         </div>
 

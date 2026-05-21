@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Merienda, Space_Grotesk } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Geist,
+  Merienda,
+  Space_Grotesk,
+} from "next/font/google";
 import { Toaster } from "sonner";
 import { WeddingProvider } from "./_lib/context";
 import { getWeddingData } from "./_lib/wedding-data";
@@ -14,6 +19,18 @@ const merienda = Merienda({
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
+  subsets: ["latin", "latin-ext"],
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+});
+
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin", "latin-ext"],
 });
 
@@ -65,7 +82,7 @@ export default async function RootLayout({
       lang="tr"
       suppressHydrationWarning
       style={{ colorScheme: "dark" }}
-      className={`${merienda.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
+      className={`${merienda.variable} ${spaceGrotesk.variable} ${cormorant.variable} ${geist.variable} h-full antialiased dark`}
     >
       <body
         className="min-h-full flex flex-col bg-[#1a0f0a] text-[#faf0e6]"
