@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 import { t } from "../_lib/i18n";
 import { ArrowRightIcon } from "../_icons/ArrowRightIcon";
 
@@ -17,8 +18,8 @@ const BASE = "";
 
 export function SectionStoryPreview() {
   const wedding = useWedding();
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   const sectionRef = useRef<HTMLElement>(null);
   const photo1Ref = useRef<HTMLDivElement>(null);

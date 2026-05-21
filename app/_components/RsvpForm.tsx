@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 import { t } from "../_lib/i18n";
 import { HeartIcon } from "../_icons/HeartIcon";
 import { AnimatedCheckMark, AnimatedCrossMark } from "./AnimatedRsvpMarks";
@@ -32,8 +33,8 @@ export function RsvpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   const weddingDate = new Date(wedding.weddingDate).toLocaleDateString(
     "tr-TR",

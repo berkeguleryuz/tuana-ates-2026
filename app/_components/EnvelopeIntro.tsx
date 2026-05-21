@@ -5,6 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 
 const STORAGE_KEY = "ta-envelope-opened";
 // TEST modu: true iken zarf HER sayfa yenilemesinde tekrar açılır.
@@ -16,8 +17,8 @@ const FLAP_CLIP = "polygon(0% 0%, 100% 0%, 50% 53%)";
 
 export function EnvelopeIntro() {
   const wedding = useWedding();
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   const [removed, setRemoved] = useState(false);
   const [opening, setOpening] = useState(false);

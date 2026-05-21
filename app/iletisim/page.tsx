@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 import { t } from "../_lib/i18n";
 import { HeartIcon } from "../_icons/HeartIcon";
 import { MapPinIcon } from "../_icons/MapPinIcon";
@@ -11,8 +12,8 @@ const BASE = "";
 
 export default function IletisimPage() {
   const wedding = useWedding();
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   return (
     <div className="min-h-svh pt-24 pb-12 px-4 sm:px-6">

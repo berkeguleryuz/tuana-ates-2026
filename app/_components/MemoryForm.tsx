@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 import { MemoryCard } from "./MemoryCard";
 import { t } from "../_lib/i18n";
 import { SendIcon } from "../_icons/SendIcon";
@@ -27,8 +28,8 @@ const inputClass =
 
 export function MemoryForm({ initialMemories }: Props) {
   const wedding = useWedding();
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   const [memories, setMemories] = useState<Memory[]>(initialMemories);
   const [authorName, setAuthorName] = useState("");
