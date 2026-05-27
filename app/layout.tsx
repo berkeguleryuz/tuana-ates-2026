@@ -44,7 +44,9 @@ export async function generateMetadata(): Promise<Metadata> {
     const data = await getWeddingData();
     brideFirst = stripSurname(data.brideName);
     groomFirst = stripSurname(data.groomName);
-  } catch {}
+  } catch {
+    
+  }
 
   const title = `${brideFirst} & ${groomFirst}`;
   const description = `${brideFirst} ve ${groomFirst} düğün davetiyesi.`;
