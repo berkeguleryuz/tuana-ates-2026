@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useSyncExternalStore, useState } from "react";
 import { motion } from "framer-motion";
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 import { t } from "../_lib/i18n";
 
 const TR_TIMEZONE = "Europe/Istanbul";
@@ -82,8 +83,8 @@ export function SectionCountdown() {
     return () => clearInterval(interval);
   }, [target]);
 
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   const pad = (n: number) => String(n).padStart(2, "0");
 

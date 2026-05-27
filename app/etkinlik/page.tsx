@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 import { t } from "../_lib/i18n";
 import { EventSchedule } from "../_components/EventSchedule";
 import { MapPinIcon } from "../_icons/MapPinIcon";
@@ -11,8 +12,8 @@ import { ClockIcon } from "../_icons/ClockIcon";
 
 export default function EtkinlikPage() {
   const wedding = useWedding();
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   const weddingDate = new Date(wedding.weddingDate).toLocaleDateString(
     "tr-TR",

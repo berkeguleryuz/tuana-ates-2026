@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 import { BottomBar } from "./BottomBar";
 import { t } from "../_lib/i18n";
 import { MenuIcon } from "../_icons/MenuIcon";
@@ -48,8 +49,8 @@ export function SunsetNav() {
     if (!isOpen) setIsScrolled(latest > 50);
   });
 
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   const isActive = (href: string) => {
     if (href === "/") return isHome;

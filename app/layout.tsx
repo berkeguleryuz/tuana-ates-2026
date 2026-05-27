@@ -8,6 +8,7 @@ import {
 import { Toaster } from "sonner";
 import { WeddingProvider } from "./_lib/context";
 import { getWeddingData } from "./_lib/wedding-data";
+import { stripSurname } from "./_lib/names";
 import { SunsetNav } from "./_components/SunsetNav";
 import { SunsetFooter } from "./_components/SunsetFooter";
 import "./globals.css";
@@ -38,12 +39,14 @@ const SITE_URL = process.env.SITE_URL || "http://localhost:3000";
 
 export async function generateMetadata(): Promise<Metadata> {
   let brideFirst = "Tuana";
-  let groomFirst = "Ateş";
+  let groomFirst = "Ateş Fırat";
   try {
     const data = await getWeddingData();
-    brideFirst = data.brideName.split(" ")[0];
-    groomFirst = data.groomName.split(" ")[0];
-  } catch {}
+    brideFirst = stripSurname(data.brideName);
+    groomFirst = stripSurname(data.groomName);
+  } catch {
+    
+  }
 
   const title = `${brideFirst} & ${groomFirst}`;
   const description = `${brideFirst} ve ${groomFirst} düğün davetiyesi.`;

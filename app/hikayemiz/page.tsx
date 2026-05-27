@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useWedding } from "../_lib/context";
+import { stripSurname } from "../_lib/names";
 import { t } from "../_lib/i18n";
 
 interface Milestone {
@@ -59,8 +60,8 @@ function getMilestones(brideFirst: string, groomFirst: string): Milestone[] {
 
 export default function HikayemizPage() {
   const wedding = useWedding();
-  const brideFirst = wedding.brideName.split(" ")[0];
-  const groomFirst = wedding.groomName.split(" ")[0];
+  const brideFirst = stripSurname(wedding.brideName);
+  const groomFirst = stripSurname(wedding.groomName);
 
   const milestones: Milestone[] =
     wedding.storyMilestones && wedding.storyMilestones.length >= 1
